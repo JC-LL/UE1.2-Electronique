@@ -1,0 +1,19 @@
+\documentclass{book}
+
+\usepackage{listings}
+
+\begin{document}
+
+\chapter{Strange bug}
+
+\paragraph{Hello : strange bug}
+aaaa
+\begin{lstlisting}[frame=single]
+ p1 : process(a,b,c)
+ begin
+   w1 <= (a or b) and c;
+   w2 <= 1;
+ end process;
+\end{lstlisting}
+
+\end{document}

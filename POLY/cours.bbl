@@ -1,0 +1,46 @@
+\begin{thebibliography}{1}
+
+\bibitem{Bryant:2010:CSP:1841497}
+Randal~E. Bryant and David~R. O'Hallaron.
+\newblock {\em Computer Systems: A Programmer's Perspective}.
+\newblock Addison-Wesley Publishing Company, USA, 2nd edition, 2010.
+
+\bibitem{Chu2006}
+Pong~P. Chu.
+\newblock {\em RTL Hardware Design Using VHDL: Coding for Efficiency,
+  Portability, and Scalability}.
+\newblock Wiley-IEEE Press, 2006.
+
+\bibitem{Chu2008}
+Pong~P. Chu.
+\newblock {\em FPGA Prototyping by VHDL Examples: Xilinx Spartan-3 Version}.
+\newblock Wiley-IEEE Press, 2008.
+
+\bibitem{Clements:2000:PCH:518138}
+Alan Clements.
+\newblock {\em The Principles of Computer Hardware}.
+\newblock Oxford University Press, Inc., New York, NY, USA, 3rd edition, 2000.
+
+\bibitem{Cover:2006:EIT:1146355}
+Thomas~M. Cover and Joy~A. Thomas.
+\newblock {\em Elements of Information Theory (Wiley Series in
+  Telecommunications and Signal Processing)}.
+\newblock Wiley-Interscience, 2006.
+
+\bibitem{Katz}
+Randy~H. Katz.
+\newblock {\em Contemporary Logic Design}.
+\newblock Addison-Wesley Longman Publishing Co., Inc., Boston, MA, USA, 2nd
+  edition, 2000.
+
+\bibitem{Mano:2001:DD:559360}
+M.~Morris Mano.
+\newblock {\em Digital Design}.
+\newblock Prentice Hall PTR, Upper Saddle River, NJ, USA, 3rd edition, 2001.
+
+\bibitem{Weste2010}
+Neil Weste and David Harris.
+\newblock {\em CMOS VLSI Design: A Circuits and Systems Perspective}.
+\newblock Addison-Wesley Publishing Company, USA, 4th edition, 2010.
+
+\end{thebibliography}
