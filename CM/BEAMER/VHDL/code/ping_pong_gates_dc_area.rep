@@ -1,0 +1,30 @@
+ 
+****************************************
+Report : area
+Design : ping_pong
+Version: O-2018.06-SP1
+Date   : Fri Oct 26 12:51:46 2018
+****************************************
+
+Library(s) Used:
+
+    saed90nm_typ (File: /home/jcll/packages/SYNOPSYS/SAED90_EDK/lib/saed90nm_typ.db)
+
+Number of ports:                            4
+Number of nets:                            19
+Number of cells:                           15
+Number of combinational cells:             13
+Number of sequential cells:                 2
+Number of macros/black boxes:               0
+Number of buf/inv:                          4
+Number of references:                       7
+
+Combinational area:                 93.081600
+Buf/Inv area:                       22.118401
+Noncombinational area:              70.041603
+Macro/Black Box area:                0.000000
+Net Interconnect area:               3.388133
+
+Total cell area:                   163.123203
+Total area:                        166.511337
+1

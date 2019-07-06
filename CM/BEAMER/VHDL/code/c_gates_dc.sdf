@@ -1,0 +1,83 @@
+(DELAYFILE
+(SDFVERSION "OVI 2.1")
+(DESIGN "C_1")
+(DATE "Fri Oct 26 11:44:46 2018")
+(VENDOR "saed90nm_typ")
+(PROGRAM "Synopsys Design Compiler cmos")
+(VERSION "O-2018.06-SP1")
+(DIVIDER /)
+(VOLTAGE 1.20:1.20:1.20)
+(PROCESS "TYPICAL")
+(TEMPERATURE 25.00:25.00:25.00)
+(TIMESCALE 1ns)
+(CELL
+  (CELLTYPE "C_1")
+  (INSTANCE)
+  (DELAY
+    (ABSOLUTE
+    (INTERCONNECT inst_a_1/U1/Q inst_b_1/U3/IN1 (0.000:0.000:0.000))
+    (INTERCONNECT inst_a_2/U1/Q inst_b_1/U3/IN2 (0.000:0.000:0.000))
+    (INTERCONNECT inst_b_1/U3/Q inst_b_1/s_reg/D (0.000:0.000:0.000))
+    (INTERCONNECT clk inst_b_1/s_reg/CLK (0.000:0.000:0.000))
+    (INTERCONNECT reset_n inst_b_1/s_reg/RSTB (0.000:0.000:0.000))
+    (INTERCONNECT in_e inst_a_2/U1/IN1 (0.000:0.000:0.000))
+    (INTERCONNECT in_d inst_a_2/U1/IN2 (0.000:0.000:0.000))
+    (INTERCONNECT in_e inst_a_1/U1/IN1 (0.000:0.000:0.000))
+    (INTERCONNECT in_d inst_a_1/U1/IN2 (0.000:0.000:0.000))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "XOR2X1")
+  (INSTANCE inst_b_1/U3)
+  (DELAY
+    (ABSOLUTE
+    (IOPATH IN1 Q (0.059:0.060:0.060) (0.063:0.064:0.064))
+    (IOPATH IN2 Q (0.069:0.069:0.069) (0.070:0.071:0.071))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "DFFARX1")
+  (INSTANCE inst_b_1/s_reg)
+  (DELAY
+    (ABSOLUTE
+    (IOPATH CLK Q (0.164:0.164:0.164) (0.182:0.182:0.182))
+    (IOPATH RSTB Q () (0.049:0.049:0.049))
+    (IOPATH CLK QN (0.123:0.123:0.123) (0.107:0.107:0.107))
+    (IOPATH RSTB QN (0.156:0.156:0.156) ())
+    )
+  )
+  (TIMINGCHECK
+    (WIDTH (posedge CLK) (0.082:0.082:0.082))
+    (WIDTH (negedge CLK) (0.117:0.117:0.117))
+    (SETUP (posedge D) (posedge CLK) (0.084:0.084:0.084))
+    (SETUP (negedge D) (posedge CLK) (0.057:0.057:0.057))
+    (HOLD (posedge D) (posedge CLK) (-0.040:-0.041:-0.041))
+    (HOLD (negedge D) (posedge CLK) (-0.013:-0.013:-0.013))
+    (RECOVERY (posedge RSTB) (posedge CLK) (-0.076:-0.076:-0.076))
+    (HOLD (posedge RSTB) (posedge CLK) (0.091:0.091:0.091))
+    (WIDTH (negedge RSTB) (0.103:0.103:0.103))
+  )
+)
+(CELL
+  (CELLTYPE "AND2X1")
+  (INSTANCE inst_a_2/U1)
+  (DELAY
+    (ABSOLUTE
+    (IOPATH IN1 Q (0.048:0.048:0.048) (0.046:0.046:0.046))
+    (IOPATH IN2 Q (0.053:0.053:0.053) (0.049:0.049:0.049))
+    )
+  )
+)
+(CELL
+  (CELLTYPE "AND2X1")
+  (INSTANCE inst_a_1/U1)
+  (DELAY
+    (ABSOLUTE
+    (IOPATH IN1 Q (0.049:0.049:0.049) (0.047:0.047:0.047))
+    (IOPATH IN2 Q (0.054:0.054:0.054) (0.050:0.050:0.050))
+    )
+  )
+)
+)

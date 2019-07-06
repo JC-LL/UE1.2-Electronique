@@ -1,0 +1,68 @@
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ping_pong is
+  port(
+    reset_n : in  std_logic;
+    clk     : in  std_logic;
+    ball    : in  std_logic;
+    spy     : out std_logic
+    );
+end entity;
+
+architecture rtl of ping_pong is
+
+  -- creation d'un type enumeré pour les états symboliques.
+  type state_t is (IDLE, PING, PONG);
+
+  signal state, next_state : state_t;
+
+begin
+
+  bascules_d : process(reset_n, clk)
+  begin
+    if reset_n = '0' then
+      state <= next_state;
+    elsif rising_edge(clk) then
+      state <= next_state;
+    end if;
+  end process;
+
+
+  next_state_func : process(ball, state)
+  begin
+    --pas defaut, reste dans le meme etat
+    next_state <= state;
+
+    case state is
+
+      when PING =>
+        if ball = '1' then
+          next_state <= PONG;
+        end if;
+
+      when PONG =>
+        if ball = '1' then
+          next_state <= PING;
+        end if;
+
+      when others =>
+        null;
+    end case;
+
+  end process;
+
+  spy <= '1' when state = PING else '0';
+
+
+end rtl;
+
+
+
+
+
+
+
+
+

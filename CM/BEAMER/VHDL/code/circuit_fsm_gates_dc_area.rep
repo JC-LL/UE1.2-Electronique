@@ -1,0 +1,30 @@
+ 
+****************************************
+Report : area
+Design : circuit_fsm
+Version: O-2018.06-SP1
+Date   : Thu Oct 25 17:29:35 2018
+****************************************
+
+Library(s) Used:
+
+    saed90nm_typ (File: /home/jcll/packages/SYNOPSYS/SAED90_EDK/lib/saed90nm_typ.db)
+
+Number of ports:                            5
+Number of nets:                            15
+Number of cells:                            9
+Number of combinational cells:              7
+Number of sequential cells:                 2
+Number of macros/black boxes:               0
+Number of buf/inv:                          1
+Number of references:                       7
+
+Combinational area:                 50.688001
+Buf/Inv area:                        5.529600
+Noncombinational area:              64.512001
+Macro/Black Box area:                0.000000
+Net Interconnect area:               2.173640
+
+Total cell area:                   115.200002
+Total area:                        117.373641
+1

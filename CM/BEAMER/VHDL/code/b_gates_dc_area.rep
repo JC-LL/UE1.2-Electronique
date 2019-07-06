@@ -1,0 +1,30 @@
+ 
+****************************************
+Report : area
+Design : B
+Version: O-2018.06-SP1
+Date   : Fri Oct 26 12:31:17 2018
+****************************************
+
+Library(s) Used:
+
+    saed90nm_typ (File: /home/jcll/packages/SYNOPSYS/SAED90_EDK/lib/saed90nm_typ.db)
+
+Number of ports:                            5
+Number of nets:                             6
+Number of cells:                            2
+Number of combinational cells:              1
+Number of sequential cells:                 1
+Number of macros/black boxes:               0
+Number of buf/inv:                          0
+Number of references:                       2
+
+Combinational area:                 13.824000
+Buf/Inv area:                        0.000000
+Noncombinational area:              32.256001
+Macro/Black Box area:                0.000000
+Net Interconnect area:               0.496502
+
+Total cell area:                    46.080001
+Total area:                         46.576503
+1

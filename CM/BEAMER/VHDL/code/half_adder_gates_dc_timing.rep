@@ -1,0 +1,36 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+        -sort_by group
+Design : half_adder
+Version: O-2018.06-SP1
+Date   : Fri Oct 26 12:17:25 2018
+****************************************
+
+Operating Conditions: TYPICAL   Library: saed90nm_typ
+Wire Load Model Mode: segmented
+
+  Startpoint: a (input port)
+  Endpoint: s (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  half_adder         ForQA                 saed90nm_typ
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 r
+  a (in)                                   0.00       0.00 r
+  U3/Q (XOR2X1)                            0.06       0.06 f
+  s (out)                                  0.00       0.06 f
+  data arrival time                                   0.06
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
