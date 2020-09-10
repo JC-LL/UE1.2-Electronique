@@ -78,7 +78,7 @@ begin
   reg_3 : process(reset_n, clk)
   begin
     if reset_n = '0' then
-      r3 <= to_unsigned(0, n);
+      r3 <= to_unsigned(0, 4*n+3);
     elsif rising_edge(clk) then
       case control.cmd_3 is
         when 0 =>
@@ -93,8 +93,10 @@ begin
     end if;
   end process;
 
+  px <= r3; -- output
+
   -- combinatorial parts :
-  mux5_proc : process(control)
+  mux5_proc : process(control,r1,r2,r4)
   begin
     case control.cmd_5 is
       when 0 =>
@@ -104,7 +106,7 @@ begin
       when 2 =>
         operand_add1 <= r1;
       when others =>
-        null;
+        operand_add1 <= r1; --default. Needed for inference of mux.
     end case;
   end process;
 

@@ -10,12 +10,14 @@ entity controler is
     reset_n : in std_logic;
     clk     : in std_logic;
     go      : in  std_logic;
+    done    : out std_logic;
     control : out control_type);
 end controler;
 
 architecture rtl of controler is
   type state_t is (s0,s1,s2,s3);
   signal state : state_t;
+  signal done_c : std_logic;
 begin
 
   next_state_logic : process(reset_n,clk)
@@ -42,6 +44,7 @@ begin
 
   output_logic : process(state)
   begin
+    done_c <='0'; --by default
     case state is
     when s0 =>
       control.cmd_0 <= 1;
@@ -71,6 +74,7 @@ begin
       control.cmd_3 <= 2;-- !
       control.cmd_4 <= 0;
       control.cmd_5 <= 2;-- !
+      done_c <= '1';
     when others =>
       control.cmd_0 <= 0;
       control.cmd_1 <= 0;
@@ -81,5 +85,13 @@ begin
     end case;
   end process;
 
+  done_reg : process(reset_n,clk)
+  begin
+    if reset_n='0' then
+      done <= '0';
+    elsif rising_edge(clk) then
+      done <= done_c;
+    end if;
+  end process;
 
 end rtl;

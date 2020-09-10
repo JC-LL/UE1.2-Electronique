@@ -11,6 +11,7 @@ entity fsmd is
     reset_n : in std_logic;
     clk     : in std_logic;
     go      : in  std_logic;
+    done    : out std_logic;
     x       : in  unsigned(n-1 downto 0);
     a0      : in  unsigned(n-1 downto 0);
     a1      : in  unsigned(n-1 downto 0);
@@ -28,6 +29,7 @@ begin
       reset_n => reset_n,
       clk     => clk,
       go      => go,
+      done    => done,
       control => control);
 
   datapath_1: entity work.datapath
