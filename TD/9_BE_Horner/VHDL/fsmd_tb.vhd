@@ -1,9 +1,3 @@
---------------------------------------------------------------------------------
--- this file was generated automatically by Vertigo Ruby utility
--- date : (d/m/y h:m) 10/09/2020 14:51
--- author : Jean-Christophe Le Lann - 2014
---------------------------------------------------------------------------------
-
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;

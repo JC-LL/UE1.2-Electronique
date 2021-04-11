@@ -26,7 +26,7 @@ begin
 
   controler_1: entity work.controler
     port map (
-      reset_n => reset_n,
+      reset_n => reset_n, --port formel => signaux
       clk     => clk,
       go      => go,
       done    => done,

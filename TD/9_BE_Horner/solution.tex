@@ -1,6 +1,9 @@
 \documentclass[a4paper,11pt]{exam}
+\usepackage{fancyvrb}
+%\usepackage{rotating}
 
-\printanswers
+%\printanswers
+
 \pagestyle{headandfoot}
 \runningheadrule
 %\firstpageheader{Math 115}{First Exam}{July 4, 1776}
@@ -170,9 +173,11 @@ Dès lors qu'un ordonnancement est choisi, il est alors aisé de décrire un aut
       ~   & ~                   & ~                         & $cmd_5 <= 2$                  \\
       \hline
     \end{tabular}
+    \newline
+
     Quelques remarques :
     \begin{itemize}
-      \item On notera au passage que ces transferts de registres ressemblent à s'y méprendre à un langage de programmation de bas niveau : l'assembleur. Toutefois, nos transferts de registres sont plus puissants que l'assembleur : plusieurs transferts peuvent avoir lieu en même temps, en parallèle ,alors qu'en assembleur traditionnel chaque tranfert se fait séquentiellement.
+      \item On notera au passage que ces transferts de registres ressemblent à ce que réalise un langage de programmation de bas niveau : l'assembleur. Toutefois, nos transferts de registres sont ici plus puissants que l'assembleur : plusieurs transferts peuvent avoir lieu en même temps, en parallèle ,alors qu'en assembleur traditionnel chaque tranfert se fait séquentiellement.
       \item L'opération de multiplication suivie d'une addition est si fréquente dans le domaine scientifique, qu'il existe un opérateur dédié : le MULACC. Il est présent notamment dans les processeurs de traitement du signal, appelés DSP (digital signal processors, les plus connus étant ceux de Texas Instruments). Les FPGA modernes, possèdent en plus de leur matrice de LUTs, un ensemble de tels opérateurs optimisés.
     \end{itemize}
   \end{solution}
@@ -182,16 +187,19 @@ Dès lors qu'un ordonnancement est choisi, il est alors aisé de décrire un aut
 
 Une difficulté récurrente lorsqu'on traduit un algorithme en Microarchitecture réside dans le dimensionnement des signaux, c'est-à-dire la détermination du nombre de bits nécessaires à la représentation des nombres, sans perte d'information préjudiciable. On parle aussi de leur \textit{dynamique}. Il y a perte d'information lors d'une troncature (élimination brutale de bits à un certain rang).
 
-\begin{itemize}
-  \item \textbf{Question 9} : soient deux signaux $s_n$ et $s_{n'}$ entiers codés respectivement sur $n$ et $n'$ bits. Déterminer le nombre de bits nécessaires à l'addition $s_n+s_{n'}$, sans perte d'information.
+\begin{questions}
+
+  \question \textbf{Question 9} : soient deux signaux $s_n$ et $s_{n'}$ entiers codés respectivement sur $n$ et $n'$ bits. Déterminer le nombre de bits nécessaires à l'addition $s_n+s_{n'}$, sans perte d'information.
   \begin{solution}
     Par exemple, avec $n=8$ et $n'=8$, $s_n,s_{n'} \in \{0..255\}$ et $s_n+s_{n'} \in \{0..510\}$. On se convainc facilement que le nombre de bits pour le résultat de l'addition est $max(n,n')+1$.
   \end{solution}
-  \item \textbf{Question 10} : même question pour $s_n*s_{n'}$.
+
+  \question \textbf{Question 10} : même question pour $s_n*s_{n'}$.
   \begin{solution}
     Pour la multiplication le résultat est $n+n'$.
   \end{solution}
-  \item \textbf{Question 11} : en déduire la dynamique des signaux apparaissant dans le datapath.
+
+  \question \textbf{Question 11} : en déduire la dynamique des signaux apparaissant dans le datapath.
   \begin{solution}
 A la fin de chaque CSTEP, la dynamique des signaux calculés augmente. Si chaque entrée est codée sur un même nombre $n$ de bits :
   \begin{itemize}
@@ -201,20 +209,117 @@ A la fin de chaque CSTEP, la dynamique des signaux calculés augmente. Si chaque
   \end{itemize}
   A titre d'exemple, partant de $n=8$ bits, on obtient $35$ bits nécessaires en sortie.
   \end{solution}
-\end{itemize}
+\end{questions}
 
 \section{Codage VHDL}
 
-Le code VHDL de cet accélérateur est fourni sur Moodle, ainsi qu'un banc de test.
+Le code VHDL de cet accélérateur est fourni sur Moodle, ainsi qu'un banc de test. La syntaxe de VHDL est complexe et nouvelle pour vous, mais vous êtes à même d'en comprendre les grandes lignes.
 
-\begin{itemize}
-  \item \textbf{Question 12} : observez attentivement le code de l'accélérateur. Discutez avec votre encadrant afin de bien vérifier que vous avez compris la correspondance avec vos schémas précédents.
-\end{itemize}
+\begin{questions}
+  \question \textbf{Question 12} : observez attentivement le code de l'accélérateur.  Dessiner l'architecture générale du système. Discutez avec votre encadrant afin de bien vérifier que vous avez compris la correspondance avec vos schémas précédents.
+  \begin{solution}
+    \begin{center}
+      \includegraphics[scale=0.4]{fsmd.png}
+    \end{center}
+  \end{solution}
 
-Le banc de test réalise tout d'abord la configuration de l'accélérateur, par l'envoi des paramètres du polynôme, puis réalise le calcul de $P_3(x)$ pour une succession de valeurs $x$.
+  Le banc de test réalise tout d'abord la configuration de l'accélérateur, par l'envoi des paramètres du polynôme, puis réalise le calcul de $P_3(x)$ pour une succession de valeurs $x$.
+  \question \textbf{Question 13} : observez attentivement le code du banc de test. Discutez avec votre encadrant afin de bien vérifier que vous avez compris son fonctionnement.
+  \begin{solution}
+    Le banc de test se présente comme un design classique : il est composé d'une entité et d'une architecture. Toutefois l'entité ne possède aucun port d'entrée-sortie. Cela est parfaitement normal, car
+    notre testbench représente une "expérience virtuelle", dans un laboratoire tout aussi virtuel, entièrement équipé et autonome ! Il n'a besoin d'aucune information extérieure. L'architecture représente
+    la paillasse où l'on prépare un "setup expérimental" : au centre, on retrouve bien entendu le circuit à tester, et tout autour de lui des instruments virtuels, sous forme de processus qui fonctionnent en parallèle, les uns des autres : générateurs de signaux, sondes, outils de diagnostique etc. Notre testbench réalise également une comparaison des signaux issu de notre circuit (done et px) avec un modèle de référence. Ce modèle de référence est ici calculé également par VHDL. Dans notre cas, VHDL est en effet capable de calculer un polynôme, de manière "informatique". I laurait été assez maladroit de recourir à un modèle de référence Python ou Matlab pour écrire une référence si simple. Toutefois, cela arrive fréquemment que les équipes en présence n'ait pas la même culture. Les algorithmiciens, qui fournissent de tels modèles de références, connaissent rarement VHDL.
+    \begin{center}
+      \includegraphics[scale=0.3]{fsmd_tb.png}
+    \end{center}
+  \end{solution}
 
-\begin{itemize}
-  \item \textbf{Question 13} : observez attentivement le code du banc de test. Discutez avec votre encadrant afin de bien vérifier que vous avez compris son fonctionnement.
-\end{itemize}
+  \question \textbf{Question 14} : la simulation ne sera pas réalisée en séance, mais une video sera mise à disposition.
+  \begin{solution}
+    La simulation se fait ici sous Linux, à l'aide de GHDL. GHDL permet de générer un simulateur compilé. Cette génération se fait en 3 grandes étapes :
+    \begin{itemize}
+      \item \textbf{Analyse }des fichiers avec l'option "-a" de ghdl.
+      \item \textbf{Elaboration} du simulation avec l'option "-e" de ghdl.
+      \item \textbf{Lancement} (\textbf{"run"}) du simulation avec l'option "-r" de ghdl.
+      \item \textbf{Visualisation} des résultats de simulation avec GtkWave.
+    \end{itemize}
+    Ces commandes répétitives sont facilement automatisables sous Linux. Un script bash "compile.x" est fourni sur Moodle.
+    On obtient le \textbf{chronogramme} suivant.
+
+
+    \begin{center}
+       \includegraphics[scale=0.3]{gtkwave.png}
+    \end{center}
+    Dans le terminal Linux apparaissent les messages du simulateur, ainsi que les "reports" que l'on a décrit en VHDL :
+
+    \begin{Verbatim}[fontsize=\small]
+    ~/JCLL/ens/UE1.2-Electronique/TD/9_BE_Horner/VHDL$ ./compile.x
+    ============ cleaning  ============
+    ======= analyzing vhdl files ======
+    => controler_pkg.vhd
+    => controler.vhd
+    => datapath.vhd
+    => fsmd.vhd
+    => fsmd_tb.vhd
+    ======= elaborating simulation ======
+    => fsmd_tb
+    ========= running simulation ========
+    @0ms   :(report note): running testbench for fsmd(rtl)
+    @0ms   :(report note): waiting for asynchronous reset
+    @215ns :(report note): p(x)=4x^3 +3x^2 + 2^x + 1
+    @215ns :(report note): sending parameters a0...a3
+    @315ns :(report note): expected p(0)=1
+    @365ns :(report note): actual : p(0)=1
+    @365ns :(report note): expected p(1)=10
+    @415ns :(report note): actual : p(1)=10
+    @415ns :(report note): expected p(2)=49
+    @465ns :(report note): actual : p(2)=49
+    @465ns :(report note): expected p(3)=142
+    @515ns :(report note): actual : p(3)=142
+    @515ns :(report note): expected p(4)=313
+    @565ns :(report note): actual : p(4)=313
+    @565ns :(report note): expected p(5)=586
+    @615ns :(report note): actual : p(5)=586
+    @615ns :(report note): expected p(6)=985
+    @665ns :(report note): actual : p(6)=985
+    @665ns :(report note): expected p(7)=1534
+    @715ns :(report note): actual : p(7)=1534
+    @715ns :(report note): expected p(8)=2257
+    @765ns :(report note): actual : p(8)=2257
+    @765ns :(report note): expected p(9)=3178
+    @815ns :(report note): actual : p(9)=3178
+    @815ns :(report note): expected p(10)=4321
+    @865ns :(report note): actual : p(10)=4321
+    @865ns :(report note): expected p(11)=5710
+    @915ns :(report note): actual : p(11)=5710
+    @915ns :(report note): expected p(12)=7369
+    @965ns :(report note): actual : p(12)=7369
+    @965ns :(report note): expected p(13)=9322
+    @1015ns:(report note): actual : p(13)=9322
+    @1015ns:(report note): expected p(14)=11593
+    @1065ns:(report note): actual : p(14)=11593
+    @1065ns:(report note): expected p(15)=14206
+    @1115ns:(report note): actual : p(15)=14206
+    @1115ns:(report note): expected p(16)=17185
+    @1165ns:(report note): actual : p(16)=17185
+    @1165ns:(report note): expected p(17)=20554
+    @1215ns:(report note): actual : p(17)=20554
+    @1215ns:(report note): expected p(18)=24337
+    @1265ns:(report note): actual : p(18)=24337
+    @1265ns:(report note): expected p(19)=28558
+    @1315ns:(report note): actual : p(19)=28558
+    @1315ns:(report note): end of simulation
+    @1315ns:(report note): number of errors : 0 / 20 tests
+    ============== viewing ==============
+
+    GTKWave Analyzer v3.3.86 (w)1999-2017 BSI
+
+    [0] start time.
+    [1515000000] end time.
+
+  \end{Verbatim}
+  \end{solution}
+\end{questions}
+
 
 \end{document}
